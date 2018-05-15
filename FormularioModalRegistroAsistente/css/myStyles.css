@@ -1,0 +1,35 @@
+.view {
+    background-image: url(https://professor-falken.com/wp-content/uploads/2016/06/portatil-ordenador-programacion-software-macbook-codigo-Fondos-de-Pantalla-HD-professor-falken.com_.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    backface-visibility: all;
+    background-size: cover;
+}
+
+.cuadro{
+    margin-top: 90px;
+    padding: 40px;
+    color: #ffffff;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.cuadro h1,p{
+    color: white;
+}
+
+.well{
+    padding: 30px;
+    background-color: #E9ECEF;
+}
+
+label{
+    font-weight: bold;
+}
+
+.next{
+    margin: 20px;
+}
+
+#Barra{
+    background-color: #ffffff;
+}

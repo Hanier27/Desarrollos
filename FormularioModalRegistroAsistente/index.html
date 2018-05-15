@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8;">
+	<title>Registro Asistente</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/Styles.css">
+	<link rel="stylesheet" type="text/css" href="css/glyphicons.css">
+	<script type="text/javascript" src="js/validaciones.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.next').click(function() {
+				var actual ='#'+$(this).parent('.tab-pane').attr("id");
+				var li ='#'+$('[href="'+actual+'"]').attr('id');
+				var id ='#'+$(this).parent('.tab-pane').next().attr("id");
+				
+				$(actual).removeClass('show active');
+				$(id).addClass('show active');
+				
+				if(li=='#paso1'){
+
+					$(li).removeClass('active').addClass('disabled');
+					$('#paso2').removeClass('disabled').addClass('active');
+					$('.progress-bar').width('50%').html('Paso 2 de 4');
+				}else if(li=='#paso2'){
+					$(li).removeClass('active').addClass('disabled');
+					$('#paso3').removeClass('disabled').addClass('active');
+					$('.progress-bar').width('75%').html('Paso 3 de 4');
+				}else if(li=='#paso3'){
+					$(li).removeClass('active').addClass('disabled');
+					$('#paso4').removeClass('disabled').addClass('active');
+					$('.progress-bar').width('100%').html('Paso 4 de 4');
+				}
+				
+			});
+
+			$('.first').click(function() {
+				$('#fin').removeClass('show active');
+				$('#personal').addClass('show active');
+				$('#paso4').removeClass('active').addClass('disabled');
+				$('#paso1').removeClass('disabled').addClass('active');
+				$('.progress-bar').width('25%').html('Paso 1 de 4');
+			});
+
+
+		});
+	</script>
+</head>
+<body class="view">
+	<div class="container cuadro">
+		<h1>Mi Formulario de Registro</h1>
+		<p>Practica #1 de Desarrollo Web</p>
+		<hr style="border: 1px solid white;">
+		<div class="row bs-wizard" style="border-bottom: 0;">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#miModal">
+			  Registrarse
+			</button>
+		</div>
+	</div>
+
+	<div id="miModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Encabezado del modal -->
+				 <div class="modal-header">
+				 	<h5 class="modal-title" id="miModalLabel">Formulario de Registro</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button> 
+				 </div>
+				 <!-- Cuerpo del modal, en donde están todos los el contenido -->
+				 <div class="modal-body" id="miAsistente">
+				 <!-- Progress bar, color verde -->
+				 <div class="progress" style="height: 20px">
+					<div class="progress-bar bg-success progress-bar-striped active"
+					role="progressbar" aria-valuenow="1" aria-valuemin="1" ariavaluemax="4"
+					style="width: 25%; height: 20px">
+					 Paso 1 de 4
+					</div>
+				 </div>
+				 <!-- Enlaces de navegación a todas las tab -->
+				 <div class="navbar">
+					 <!-- barra de navegación ajustada -->
+					 <div class="navbar-inner d-flex justify-content-center">
+						 	<!-- Lista desordenada, (nav-pillis convierte de enlaces texto a botones) -->
+						 	<ul class="nav nav-pills" id="myTab" role="tablist">
+							  <li class="nav-item paso">
+							    <a class="nav-link active paso" id="paso1" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">
+							    	<span class="glyphicon glyphicon-user"></span>
+							 		 Personal
+							 	</a>
+							  </li>
+							  <li class="nav-item paso">
+							    <a class="nav-link disabled" id="paso2" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="false">
+							    	<span class="glyphicon glyphicon-thumbs-up"></span>
+							 		 Social
+								</a>
+							  </li>
+							  <li class="nav-item paso">
+							    <a class="nav-link disabled" id="paso3" data-toggle="tab" href="#seguridad" role="tab" aria-controls="seguridad" aria-selected="false">
+							    	<span class="glyphicon glyphicon-tasks"></span>
+							 		 Seguridad
+								</a>
+							  </li>
+							  <li class="nav-item paso">
+							    <a class="nav-link disabled" id="paso4" data-toggle="tab" href="#fin" role="tab" aria-controls="fin" aria-selected="false">
+							    	<span class="glyphicon glyphicon glyphicon-floppy-saved"></span>
+									Fin
+								</a>
+							  </li>
+							</ul>
+							
+					 </div>
+				 </div>
+				 <!-- Contenido de todos los tabs -->
+				 <form id="reg_form">
+					 <div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="paso1">
+							<div class="well">
+								<div class="form-group">
+									<label for="name">Nombres</label>
+									<input class="form-control input-lg" id="first_name">
+									<span class="help-block" id="error"></span>
+								</div>
+								<div class="form-group">
+									<label for="apellido">Apellidos</label>
+									<input class="form-control input-lg" id="last_name">
+									<span class="help-block" id="error"></span>
+								</div>
+								<div class="form-group">
+									<label for="fechaNac">Fecha de Nacimiento</label>
+									<input class="form-control input-lg" type="date" id="fechaNac">
+									<span class="help-block" id="error"></span>
+								</div>
+								
+							</div>
+							
+								<a type="button" class="btn  btn-secondary  next" href="#">Continuar</a>
+						</div>
+						<div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="paso2">
+							<!-- Recuadro que engloba los controles de entrada -->
+							<div class="well">
+								 <label><span class="glyphicon glyphicon-thumbs-up"></span>
+								Facebook</label>
+								 <input class="form-control input-lg">
+								 <br>
+								 <label><span class="glyphicon glyphicon-retweet"></span>
+								Twitter</label>
+								 <input class="form-control input-lg">
+								 <br>
+								 <label><span class="glyphicon glyphicon-expand"></span>
+								Youtube</label>	 
+								<input class="form-control input-lg">
+								 <br>
+								 <label><span class="glyphicon glyphicon-globe"></span> Página
+								Web</label>
+								 <input class="form-control input-lg">
+							</div>
+							<br>
+							 	<a type="button" class="btn btn-secondary next" href="#">Continuar</a> 	
+						</div>
+						<div class="tab-pane fade" id="seguridad" role="tabpanel" aria-labelledby="paso3">
+							<!-- Recuadro que engloba los controles de entrada -->
+							 <div class="well"> <h2>Ya Casi!</h2>Ingresa tu información de
+							seguridad para finalizar.</div>
+							 <label>Correo electrónico</label>
+							 <input type="email" class="form-control input-lg">
+							 <br>
+							 <label>Contraseña</label>
+							 <input type="password" class="form-control input-lg">
+							 <br>
+							 <label>Repetir contraseña</label>
+							 <input type="password" class="form-control input-lg">
+							 <br>
+							 <br>
+							 <a type="button" class="btn btn-secondary next" href="#">Continuar</a>	  	
+						</div>
+						<div class="tab-pane fade" id="fin" role="tabpanel" aria-labelledby="paso4">
+							<!-- Recuadro que engloba los controles de entrada -->
+							 <div class="well"> <h2>Has finalizado!</h2> Felicidades!, Para
+							continuar con el registro haz clic en enviar.</div>
+							<br>
+							 <a type="button" class="btn btn-success first" href="#">Volver a Empezar.</a>
+							 
+						</div>
+					</div>
+
+					 <!-- Pié del modal -->
+					 <div class="modal-footer">
+					 	<button class="btn" data-dismiss="modal" ariahidden="true">Cerrar</button>
+	 					<button class="btn btn-primary">Enviar</button>
+
+					 </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
